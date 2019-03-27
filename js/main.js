@@ -17,18 +17,16 @@ pipeDown.src = "img/pipe-green-down.png";
 
 
 var gap = 90;
-var xPos = 150;
 
-
-var move = 1;
+var move = 1.5;
 
 //pipes
 
 var pipe = [];
 
 pipe[0] = {
-	x : 200,
-	y : 0
+	x : canvas.width,
+	y : -100
 }
 
 
@@ -37,7 +35,7 @@ pipe[0] = {
 document.addEventListener("keydown", moveUp);
 
 function moveUp() {
-	bY -= 20;
+	bY -= 25;
 }
 
 
@@ -65,12 +63,20 @@ function draw() {
 				pipeDown.height
 			});
 		}
+
+		if(bX + bird.width >= pipe[i].x
+			&& bX <= pipe[i].x + pipeDown.width
+			&& (bY <= pipe[i].y + pipeDown.height
+				|| bY + bird.height >= pipe[i].y + pipeDown.height + 
+				gap) || bY + bird.height >= canvas.height - fg.height) {
+			location.reload();                         
+		}
 	} 
 
 
 		
 
-	ctx.drawImage(fg, 0, bg.height - fg.height);
+	ctx.drawImage(fg, 0, canvas.height - fg.height);
 	ctx.drawImage(bird, bX, bY);
 
 	bY += move;
