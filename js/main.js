@@ -1,27 +1,27 @@
 "use strict";
 
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-var bird = new Image();
-var bg = new Image();
-var fg = new Image();
-var pipeUp = new Image();
-var pipeDown = new Image();
-var menu = new Image();
-var gameOver = new Image();
+const bird = new Image();
+const bg = new Image();
+const fg = new Image();
+const pipeUp = new Image();
+const pipeDown = new Image();
+const menu = new Image();
+const gameOver = new Image();
 
 //score images
-var zero = new Image();
-var one = new Image();
-var two = new Image();
-var three = new Image();
-var four = new Image();
-var five = new Image();
-var six = new Image();
-var seven = new Image();
-var eight = new Image();
-var nine = new Image();
+const zero = new Image();
+const one = new Image();
+const two = new Image();
+const three = new Image();
+const four = new Image();
+const five = new Image();
+const six = new Image();
+const seven = new Image();
+const eight = new Image();
+const nine = new Image();
 
 zero.src = "img/0.png";
 one.src = "img/1.png";
@@ -34,9 +34,6 @@ seven.src = "img/7.png";
 eight.src = "img/8.png";
 nine.src = "img/9.png";
 
-var isStarted = false;
-var pointsCount = 0;
-
 bird.src = "img/bird.png";
 bg.src = "img/background-day.png";
 fg.src = "img/base.png";
@@ -45,13 +42,16 @@ pipeDown.src = "img/pipe-green-down.png";
 menu.src = "img/message.png";
 gameOver.src = "img/gameover.png";
 
-var gap = 90;
+var isStarted = false;
+var pointsCount = 0;
 
-var move = 1.5;
+const gap = 90;
+
+const move = 1.5;
 
 //pipes
 
-var pipe = [];
+const pipe = [];
 
 pipe[0] = {
   x: canvas.width,
@@ -108,36 +108,14 @@ function draw() {
 
   bY += move;
 
-  var showScore = 130;
+  var paddingLeft = 130;
   const scoreNums = [...(pointsCount + "")];
 
-  scoreNums.forEach(num => {
-    if (num === "0") {
-      ctx.drawImage(zero, showScore, 40);
-    } else if (num === "1") {
-      ctx.drawImage(one, showScore, 40);
-    } else if (num === "2") {
-      ctx.drawImage(two, showScore, 40);
-    } else if (num === "3") {
-      ctx.drawImage(three, showScore, 40);
-    } else if (num === "4") {
-      ctx.drawImage(four, showScore, 40);
-    } else if (num === "5") {
-      ctx.drawImage(five, showScore, 40);
-    } else if (num === "6") {
-      ctx.drawImage(six, showScore, 40);
-    } else if (num === "7") {
-      ctx.drawImage(seven, showScore, 40);
-    } else if (num === "8") {
-      ctx.drawImage(eight, showScore, 40);
-    } else if (num === "9") {
-      ctx.drawImage(nine, showScore, 40);
-    }
+  scoreNums.forEach(number => {
+    drawScore(number, paddingLeft, 40);
 
-    showScore += 20;
-
-});
-
+    paddingLeft += 20;
+  });
 
   requestAnimationFrame(draw);
 }
@@ -160,35 +138,39 @@ function endGame() {
 
   ctx.drawImage(gameOver, 48, 100);
   const finalScoreNums = [...(pointsCount + "")];
-  var leftIndent = 130;
+  var paddingLeft = 130;
 
-  finalScoreNums.forEach(num => {
-    if (num === "0") {
-      ctx.drawImage(zero, leftIndent, 200);
-    } else if (num === "1") {
-      ctx.drawImage(one, leftIndent, 200);
-    } else if (num === "2") {
-      ctx.drawImage(two, leftIndent, 200);
-    } else if (num === "3") {
-      ctx.drawImage(three, leftIndent, 200);
-    } else if (num === "4") {
-      ctx.drawImage(four, leftIndent, 200);
-    } else if (num === "5") {
-      ctx.drawImage(five, leftIndent, 200);
-    } else if (num === "6") {
-      ctx.drawImage(six, leftIndent, 200);
-    } else if (num === "7") {
-      ctx.drawImage(seven, leftIndent, 200);
-    } else if (num === "8") {
-      ctx.drawImage(eight, leftIndent, 200);
-    } else if (num === "9") {
-      ctx.drawImage(nine, leftIndent, 200);
-    }
+  finalScoreNums.forEach(number => {
+    drawScore(number, paddingLeft, 200);
 
-    leftIndent += 20;
+    paddingLeft += 20;
   });
 
   pointsCount = 0;
+}
+
+function drawScore(num, leftIndent, paddingTop) {
+  if (num === "0") {
+    ctx.drawImage(zero, leftIndent, paddingTop);
+  } else if (num === "1") {
+    ctx.drawImage(one, leftIndent, paddingTop);
+  } else if (num === "2") {
+    ctx.drawImage(two, leftIndent, paddingTop);
+  } else if (num === "3") {
+    ctx.drawImage(three, leftIndent, paddingTop);
+  } else if (num === "4") {
+    ctx.drawImage(four, leftIndent, paddingTop);
+  } else if (num === "5") {
+    ctx.drawImage(five, leftIndent, paddingTop);
+  } else if (num === "6") {
+    ctx.drawImage(six, leftIndent, paddingTop);
+  } else if (num === "7") {
+    ctx.drawImage(seven, leftIndent, paddingTop);
+  } else if (num === "8") {
+    ctx.drawImage(eight, leftIndent, paddingTop);
+  } else if (num === "9") {
+    ctx.drawImage(nine, leftIndent, paddingTop);
+  }
 }
 
 function increaseCount() {
@@ -196,3 +178,4 @@ function increaseCount() {
 }
 
 pipeDown.onload = showMenu;
+
