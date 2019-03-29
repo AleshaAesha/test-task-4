@@ -59,6 +59,7 @@ pipe[0] = {
 };
 
 //click
+
 document.addEventListener("keydown", moveUp);
 document.addEventListener("click", checkDrawing);
 
@@ -107,9 +108,36 @@ function draw() {
 
   bY += move;
 
-  ctx.fillStyle = "black";
-  ctx.font = "21px Verdana";
-  ctx.fillText("Points : " + pointsCount, 10, canvas.height - 20);
+  var showScore = 130;
+  const scoreNums = [...(pointsCount + "")];
+
+  scoreNums.forEach(num => {
+    if (num === "0") {
+      ctx.drawImage(zero, showScore, 40);
+    } else if (num === "1") {
+      ctx.drawImage(one, showScore, 40);
+    } else if (num === "2") {
+      ctx.drawImage(two, showScore, 40);
+    } else if (num === "3") {
+      ctx.drawImage(three, showScore, 40);
+    } else if (num === "4") {
+      ctx.drawImage(four, showScore, 40);
+    } else if (num === "5") {
+      ctx.drawImage(five, showScore, 40);
+    } else if (num === "6") {
+      ctx.drawImage(six, showScore, 40);
+    } else if (num === "7") {
+      ctx.drawImage(seven, showScore, 40);
+    } else if (num === "8") {
+      ctx.drawImage(eight, showScore, 40);
+    } else if (num === "9") {
+      ctx.drawImage(nine, showScore, 40);
+    }
+
+    showScore += 20;
+
+});
+
 
   requestAnimationFrame(draw);
 }
@@ -132,7 +160,7 @@ function endGame() {
 
   ctx.drawImage(gameOver, 48, 100);
   const finalScoreNums = [...(pointsCount + "")];
-  var leftIndent = 105;
+  var leftIndent = 130;
 
   finalScoreNums.forEach(num => {
     if (num === "0") {
